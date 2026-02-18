@@ -1,95 +1,89 @@
 ---
-const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.replace(/^\/|\/$/g, '');
+// Navbar.astro
+// REDESIGN: Clean Contrast & Better Mobile Menu
 ---
 
-<header class="sticky top-0 z-50 bg-black border-b-4 border-[#E60012] shadow-[0px_10px_20px_rgba(0,0,0,0.5)] font-sans">
-    
-    <div class="max-w-7xl mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
-        
-        <a href="/" class="group relative inline-block transform -skew-x-12 hover:scale-105 transition duration-300 z-50">
-            <div class="absolute inset-0 bg-white transform translate-x-1 translate-y-1 group-hover:bg-[#E60012] transition"></div>
-            <div class="relative bg-black text-white px-4 py-1 border-2 border-white">
-                <span class="font-black italic text-xl md:text-2xl tracking-tighter">
-                    DANNY<span class="text-[#E60012] group-hover:text-white transition">CHRISTIAN</span>
-                </span>
+<header class="fixed w-full top-0 z-50 px-4 md:px-8 h-20 bg-black border-b-4 border-[#E60012] flex items-center shadow-2xl transition-all duration-300">
+    <nav class="flex justify-between items-center w-full max-w-7xl mx-auto">
+
+        <a href="/" class="flex items-center gap-3 group transform hover:scale-105 transition duration-300 select-none">
+            <div class="relative bg-[#E60012] px-4 py-1 transform -skew-x-12 border-2 border-white shadow-[3px_3px_0px_0px_#444] group-hover:shadow-[3px_3px_0px_0px_#fff] transition">
+                 <span class="block font-black italic text-xl md:text-2xl tracking-tighter text-white transform skew-x-12 font-optima">DANNY</span>
             </div>
+            <span class="text-white font-black italic text-xl md:text-2xl tracking-[0.2em] font-optima group-hover:text-[#E60012] transition">CHRISTIAN</span>
         </a>
 
-        <nav class="hidden md:flex items-center gap-6 font-black italic text-lg uppercase tracking-wider">
-            <a href="/about" class={`px-4 py-1 transform -skew-x-12 border-2 transition-all duration-300
-                ${currentPath === 'about' ? 'bg-[#E60012] text-white border-black shadow-[2px_2px_0px_#fff]' : 'text-white border-transparent hover:bg-white hover:text-black hover:border-white'}`}>
-                <span class="block transform skew-x-12">About</span>
-            </a>
-            <a href="/blog" class={`px-4 py-1 transform -skew-x-12 border-2 transition-all duration-300
-                ${currentPath.startsWith('blog') ? 'bg-[#E60012] text-white border-black shadow-[2px_2px_0px_#fff]' : 'text-white border-transparent hover:bg-white hover:text-black hover:border-white'}`}>
-                <span class="block transform skew-x-12">Mission Logs</span>
-            </a>
-            <a href="/contact" class={`group px-4 py-1 transform -skew-x-12 border-2 transition-all duration-300
-                ${currentPath === 'contact' ? 'bg-[#E60012] text-white border-black shadow-[2px_2px_0px_#fff]' : 'text-white border-transparent hover:bg-white hover:text-black hover:border-white'}`}>
-                <span class="block transform skew-x-12 flex items-center gap-2">
-                    <class="hidden group-hover:inline-block transition">
-                    Calling Card
-                </span>
-            </a>
-        </nav>
+        <ul class="hidden md:flex space-x-10 text-lg font-bold italic tracking-widest font-optima items-center">
+            <li><a href="/" class="text-white hover:text-[#E60012] transition relative group py-2">HOME<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E60012] transition-all group-hover:w-full"></span></a></li>
+            <li><a href="/about" class="text-white hover:text-[#E60012] transition relative group py-2">ABOUT<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E60012] transition-all group-hover:w-full"></span></a></li>
+            <li><a href="/blog" class="text-white hover:text-[#E60012] transition relative group py-2">MISSION LOGS<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E60012] transition-all group-hover:w-full"></span></a></li>
+            <li>
+                <a href="/contact" class="ml-2 text-black bg-white px-6 py-1 transform -skew-x-12 hover:bg-[#E60012] hover:text-white transition border-2 border-white relative group inline-block shadow-[4px_4px_0px_0px_#333]">
+                    <span class="block transform skew-x-12 font-black">CALLING CARD</span>
+                </a>
+            </li>
+        </ul>
 
-        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none z-50 relative group">
-            <div class="space-y-2">
-                <span class="block w-8 h-1 bg-white transform group-hover:rotate-3 transition duration-300"></span>
-                <span class="block w-8 h-1 bg-[#E60012] transform group-hover:-rotate-3 transition duration-300"></span>
-                <span class="block w-8 h-1 bg-white transform group-hover:rotate-3 transition duration-300"></span>
-            </div>
+        <button id="menu-toggle" class="md:hidden z-50 focus:outline-none transform hover:scale-110 transition duration-300 active:scale-95">
+            <img src="/image/p5-menu-custom.png" alt="Menu" class="w-auto h-12 drop-shadow-[0_0_2px_#fff] transform -rotate-3">
         </button>
 
-    </div>
-
-    <div id="mobile-drawer" class="fixed inset-0 z-40 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden">
-        
-        <div id="drawer-overlay" class="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-sm"></div>
-        
-        <div class="absolute right-0 top-0 bottom-0 w-3/4 bg-[#E60012] p-8 shadow-[-10px_0px_20px_rgba(0,0,0,0.8)] flex flex-col justify-center border-l-8 border-black">
-            
-            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 10px 10px;"></div>
-
-            <nav class="relative z-10 flex flex-col gap-6 font-black italic text-3xl text-right">
-                
-                <a href="/" class="text-black hover:text-white transition transform hover:-translate-x-2">HOME</a>
-                <a href="/about" class="text-black hover:text-white transition transform hover:-translate-x-2">ABOUT</a>
-                <a href="/blog" class="text-black hover:text-white transition transform hover:-translate-x-2">MISSION LOGS</a>
-                <a href="/contact" class="text-white border-4 border-black px-4 py-2 bg-black hover:bg-white hover:text-black transition shadow-[5px_5px_0px_0px_#000]">
-                    CALLING CARD
-                </a>
-
-            </nav>
-
-            <img 
-                src="/image/p5-take-your-time.png" 
-                alt="TAKE YOUR TIME" 
-                class="absolute bottom-8 right-6 w-32 md:w-40 opacity-100 filter "
-            />
-        </div>
-    </div>
-
-    <div class="absolute bottom-0 left-0 h-[1px] bg-white w-full opacity-20"></div>
+    </nav>
 </header>
 
+<div id="mobile-menu" class="fixed inset-0 top-20 bg-[#E60012] z-40 flex flex-col justify-center items-center transform translate-x-full transition-transform duration-500 ease-in-out md:hidden border-t-4 border-black overflow-hidden">
+    
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-black/10 transform skew-x-[-20deg]"></div>
+        <div class="absolute bottom-0 left-[-20%] w-1/2 h-full bg-black/5 transform skew-x-[-20deg]"></div>
+    </div>
+
+    <ul class="relative z-10 text-center space-y-10 font-black italic tracking-widest text-4xl font-optima flex flex-col items-center w-full">
+        
+        <li class="w-full">
+            <a href="/" class="mobile-link block w-full text-white hover:text-black hover:bg-white transition-all duration-300 py-2 transform hover:scale-105 hover:skew-x-[-10deg]">
+                HOME
+            </a>
+        </li>
+        
+        <li class="w-full">
+            <a href="/about" class="mobile-link block w-full text-white hover:text-black hover:bg-white transition-all duration-300 py-2 transform hover:scale-105 hover:skew-x-[-10deg]">
+                ABOUT
+            </a>
+        </li>
+        
+        <li class="w-full">
+            <a href="/blog" class="mobile-link block w-full text-white hover:text-black hover:bg-white transition-all duration-300 py-2 transform hover:scale-105 hover:skew-x-[-10deg]">
+                MISSION LOGS
+            </a>
+        </li>
+
+        <li class="pt-8">
+            <a href="/contact" class="inline-block bg-black text-white px-10 py-3 transform -skew-x-12 border-4 border-white hover:bg-white hover:text-[#E60012] hover:border-black transition shadow-[6px_6px_0px_0px_rgba(0,0,0,0.5)] mobile-link">
+                <span class="block transform skew-x-12 text-2xl">SEND CARD ➜</span>
+            </a>
+        </li>
+    </ul>
+    
+    <img src="/image/p5-take-your-time.png" class="absolute bottom-4 right-4 w-30 opacity-100 pointer-events-none drop-shadow-md z-0" alt="">
+</div>
+
 <script>
-    const btn = document.getElementById('mobile-menu-btn');
-    const drawer = document.getElementById('mobile-drawer');
-    const overlay = document.getElementById('drawer-overlay');
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    // Fungsi Toggle (Buka/Tutup)
-    function toggleMenu() {
-        const isClosed = drawer.classList.contains('translate-x-full');
-        if (isClosed) {
-            drawer.classList.remove('translate-x-full'); // Buka (Geser Masuk)
-        } else {
-            drawer.classList.add('translate-x-full'); // Tutup (Geser Keluar)
-        }
-    }
+    // Toggle Menu
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('translate-x-full');
+        document.body.classList.toggle('overflow-hidden');
+    });
 
-    // Event Listeners
-    btn.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', toggleMenu); // Klik area gelap buat nutup juga
+    // Close Menu on Link Click
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.classList.remove('overflow-hidden');
+        });
+    });
 </script>
