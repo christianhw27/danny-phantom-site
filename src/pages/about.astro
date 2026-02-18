@@ -71,10 +71,7 @@ const { Content } = await entry.render();
                         </li>
                     </ul>
                 </div>
-    <img 
-    src="/image/p5-dialog.png" 
-    class="w-[100%] max-w-none"
-    />
+
                 <div class="bg-black text-white p-6 shadow-[10px_10px_0px_0px_#E60012] transform rotate-1">
                     <h3 class="text-xl font-black italic mb-6 border-b-2 border-[#E60012] inline-block">
                         ABILITIES
@@ -99,6 +96,11 @@ const { Content } = await entry.render();
 
             <div class="flex flex-col gap-6">
 
+                    <img 
+                    src="/image/p5-dialog.png" 
+                    class="w-[100%] max-w-none"
+                    />
+
                 <div class="relative">
                     <div class="absolute inset-0 bg-[#E60012] transform skew-y-2 translate-x-3 translate-y-3 opacity-20"></div>
                     
@@ -107,8 +109,13 @@ const { Content } = await entry.render();
                             THE <span class="text-[#E60012] bg-black px-2 transform -skew-x-12 inline-block">BACKSTORY</span>
                         </h2>
                         
-                        <div class="prose prose-lg font-sans text-gray-800 space-y-6 text-justify leading-relaxed font-medium 
-                                    prose-blockquote:border-l-4 prose-blockquote:border-[#E60012] prose-blockquote:bg-gray-100 prose-blockquote:p-4 prose-blockquote:italic">
+                        <div 
+                            class="prose prose-lg font-optima text-gray-800 space-y-6 text-justify leading-relaxed font-medium 
+                                   prose-headings:font-optima prose-headings:font-bold
+                                   prose-p:font-optima prose-li:font-optima
+                                   prose-blockquote:border-l-4 prose-blockquote:border-[#E60012] prose-blockquote:bg-gray-100 prose-blockquote:p-4 prose-blockquote:italic"
+                            style="font-family: 'Optima', sans-serif;"
+                        >
                             <Content />
                         </div>
 

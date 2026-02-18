@@ -2,8 +2,10 @@
 
 /* 1. Definisi Font (Biarkan seperti yang tadi berhasil) */
 @font-face {
-  font-family: 'OptimaCustom';
-  src: url('/fonts/optima.otf');
+  font-family: 'Optima';
+  /* Pastikan nama file font di folder public/fonts/ sesuai sama yang ditulis di sini */
+  src: url('/fonts/optima.otf') format('opentype'); 
+  /* Kalau font kamu formatnya .otf, ganti jadi: url('/fonts/Optima.otf') format('opentype'); */
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -12,7 +14,7 @@
 /* 2. JURUS KUNCI: Jadikan Default Global */
 /* Ini artinya: "Hai Browser, tolong semua elemen (html & body) pakai font ini!" */
 html, body {
-  font-family: 'OptimaCustom', sans-serif;
+  font-family: 'Optima', sans-serif;
 
   /* WARNA DASAR: Abu-abu muda banget biar gak sakit mata */
   background-color: #f3f3f3; 
