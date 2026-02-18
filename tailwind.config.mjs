@@ -24,8 +24,9 @@ export default {
                 'p5-red': '#E60012',
                 'p5-black': '#000000',
             },
-            fontFamily: {
-                'optima': ['OptimaCustom', 'sans-serif'],
+            // === TAMBAHKAN BAGIAN INI ===
+			fontFamily: {
+                'optima': ['Optima', 'sans-serif'], // Kelas khusus buat manggil Optima
             },
 		},
 	},
