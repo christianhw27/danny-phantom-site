@@ -1,0 +1,133 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+// === LOGIKA PAGINATION & DATA ===
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await getCollection('blog');
+  // Urutkan dari yang terbaru
+  const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  // Potong jadi 6 artikel per halaman
+  return paginate(sortedPosts, { pageSize: 6 });
+}
+
+const { page } = Astro.props;
+const allPosts = await getCollection('blog');
+// Ambil daftar kategori unik secara otomatis
+const categories = [...new Set(allPosts.map((post) => post.data.category))];
+---
+
+<MainLayout title={`Archives - Page ${page.currentPage}`}>
+
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <img src="/image/p5-splatter.png" class="absolute bottom-0 right-0 w-96 opacity-20 -rotate-12" alt="" />
+    </div>
+
+    <section class="relative z-10 max-w-7xl mx-auto px-6 py-16">
+        
+        <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-8 border-b-4 border-black pb-8">
+            
+            <div class="relative">
+                <div class="absolute -top-10 -left-10 w-32 h-32 bg-[#E60012] rounded-full opacity-20 blur-xl"></div>
+                <h1 class="text-6xl md:text-8xl font-black italic tracking-tighter text-black transform -skew-x-12" style="text-shadow: 4px 4px 0px #aaa;">
+                    MISSION <span class="text-[#E60012]">LOGS</span>
+                </h1>
+                <p class="font-bold italic text-lg mt-2 bg-black text-white inline-block px-4 py-1 transform -skew-x-12">
+                    SELECT YOUR TARGET
+                </p>
+            </div>
+
+            <div class="flex flex-wrap gap-4 justify-end">
+                {categories.map((cat) => (
+                    <a href={`/category/${cat}`} class="group relative inline-block transition-transform hover:-translate-y-1">
+                        <div class="bg-black text-white px-6 py-2 font-black italic transform -skew-x-12 border-2 border-transparent group-hover:bg-[#E60012] group-hover:border-black transition duration-300 shadow-[4px_4px_0px_0px_#888]">
+                            <span class="block transform skew-x-12 uppercase tracking-wide">
+                                {cat}
+                            </span>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+    
+    {page.data.map((post) => (
+        <article class="group relative h-full flex flex-col">
+            
+            <div class="absolute inset-0 bg-black transform skew-x-3 translate-x-1 translate-y-1 md:translate-x-2 md:translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition duration-300"></div>
+            
+            <div class="relative flex-grow bg-white border-2 md:border-4 border-black p-3 md:p-4 flex flex-col transform skew-x-3 transition duration-300 hover:-translate-y-1">
+                
+                <div class="relative overflow-hidden border-2 border-black h-32 md:h-48 mb-3 md:mb-4 shrink-0">
+                    <div class="absolute inset-0 bg-[#E60012] opacity-0 group-hover:opacity-30 transition duration-500 z-10 mix-blend-multiply"></div>
+                    <img 
+                        src={post.data.image || "https://placehold.co/600x400"} 
+                        alt={post.data.title} 
+                        class="w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 transition duration-500"
+                    />
+                    <div class="absolute top-0 right-0 bg-[#E60012] text-white font-bold text-[10px] md:text-xs px-2 py-1 z-20 shadow-md">
+                        {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}
+                    </div>
+                </div>
+
+                <div class="mb-1">
+                     <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-gray-400 group-hover:text-[#E60012] transition">
+                        // {post.data.category}
+                     </span>
+                </div>
+
+                <a href={`/blog/${post.slug}/`} class="block mb-2">
+                    <h2 class="text-lg md:text-2xl font-black leading-tight uppercase group-hover:text-[#E60012] transition line-clamp-2">
+                        {post.data.title}
+                    </h2>
+                </a>
+
+                <p class="hidden md:block text-gray-600 font-sans text-sm line-clamp-3 mb-4 flex-grow font-medium leading-relaxed">
+                    {post.data.description}
+                </p>
+
+                <div class="mt-auto border-t-2 border-dashed border-gray-300 pt-2 flex justify-between items-center">
+                    <a href={`/blog/${post.slug}/`} class="font-black italic text-xs md:text-sm hover:text-[#E60012] flex items-center gap-2 group-hover:gap-4 transition-all">
+                        READ <span class="hidden md:inline">FILE</span> ➔
+                    </a>
+                </div>
+
+            </div>
+        </article>
+    ))}
+
+</div>
+
+
+        <div class="mt-20 flex justify-center items-center gap-8 font-black italic text-xl">
+            
+            {page.url.prev ? (
+                <a href={page.url.prev} class="bg-black text-white px-6 py-2 transform skew-x-12 hover:bg-[#E60012] transition shadow-[4px_4px_0px_0px_#888]">
+                    <span class="block transform -skew-x-12">❮ PREV</span>
+                </a>
+            ) : (
+                <span class="opacity-20 cursor-not-allowed transform skew-x-12 bg-gray-300 px-6 py-2">
+                     <span class="block transform -skew-x-12">❮ PREV</span>
+                </span>
+            )}
+
+            <div class="bg-white border-2 border-black px-4 py-1 transform -rotate-2 shadow-lg">
+                PAGE {page.currentPage} / {page.lastPage}
+            </div>
+
+            {page.url.next ? (
+                <a href={page.url.next} class="bg-black text-white px-6 py-2 transform skew-x-12 hover:bg-[#E60012] transition shadow-[4px_4px_0px_0px_#888]">
+                    <span class="block transform -skew-x-12">NEXT ❯</span>
+                </a>
+            ) : (
+                <span class="opacity-20 cursor-not-allowed transform skew-x-12 bg-gray-300 px-6 py-2">
+                     <span class="block transform -skew-x-12">NEXT ❯</span>
+                </span>
+            )}
+        </div>
+
+    </section>
+</MainLayout>

@@ -1,0 +1,127 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+// --- LOGIKA SLIDESHOW (Tidak Berubah) ---
+const imageFiles = import.meta.glob('/public/image/memories/*.{jpg,jpeg,png,webp}', { eager: true });
+let rawImages = Object.keys(imageFiles).map(path => path.replace('/public', ''));
+
+if (rawImages.length === 0) {
+    rawImages = [
+        "https://placehold.co/400x500/000000/FFFFFF/png?text=NO+IMAGES",
+        "https://placehold.co/400x500/E60012/FFFFFF/png?text=ADD+IMAGES",
+        "https://placehold.co/400x500/333333/FFFFFF/png?text=TO+FOLDER"
+    ];
+}
+
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+    let newArray = [...array];
+    while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [newArray[currentIndex], newArray[randomIndex]] = [newArray[randomIndex], newArray[currentIndex]];
+    }
+    return newArray;
+}
+
+const slideshowSlots = [1, 2, 3].map(() => shuffle(rawImages)); 
+---
+
+<MainLayout title="Danny's Palace">
+
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden font-sans">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <div class="absolute top-0 left-0 w-[120%] md:w-[45%] h-[600px] md:h-[900px] bg-[#E60012] opacity-10 transform -skew-x-12 -translate-x-10 md:-translate-x-20"></div>
+        <div class="absolute bottom-0 right-0 w-[120%] h-[500px] bg-black opacity-5 transform skew-y-6 translate-y-20"></div>
+         
+         <img src="/image/p5-splatter.png" class="absolute top-0 right-0 w-64 md:w-96 opacity-20 rotate-180 mix-blend-multiply" alt="" />
+         <img src="/image/p5-splatter2.png" class="absolute bottom-1/4 -left-20 w-80 md:w-[500px] opacity-10 -rotate-45 mix-blend-multiply" alt="" />
+    </div>
+
+
+    <section class="relative z-10 pt-32 pb-48 px-4 md:px-6 text-center overflow-hidden">
+        
+        <img src="/image/p5-star.png" class="absolute top-10 -left-10 md:left-[5%] w-32 md:w-48 animate-pulse z-0 opacity-80 alt="" />
+        
+        <img src="/image/p5-star.png" class="absolute bottom-20 right-0 md:right-[10%] w-24 md:w-36 animate-pulse z-0 opacity-70 animation-delay-2000" alt="" style="animation-delay: -2s;" />
+
+        <img src="/image/p5-star.png" class="absolute top-5 left-[60%] w-16 md:w-24 animate-pulse z-0 opacity-60 alt="" style="animation-delay: -5s;" />
+
+        <img src="/image/p5-mask.png" class="absolute top-28 right-[5%] md:right-[15%] w-40 md:w-64 animate-float z-0 rotate-12 drop-shadow-xl" alt="Mask" />
+
+        <img src="/image/p5-dagger.png" class="absolute bottom-32 left-[5%] md:left-[10%] w-32 md:w-48 animate-float z-0  opacity-50" alt="Dagger" style="animation-delay: -3s;" />
+
+
+        <div class="relative inline-block group mt-10 md:mt-0">
+            <div class="absolute inset-0 bg-black transform -skew-x-12 scale-110 shadow-[8px_8px_0px_0px_#E60012] md:shadow-[12px_12px_0px_0px_#E60012]"></div>
+            <h1 class="relative z-10 text-5xl md:text-9xl font-black italic text-white tracking-tighter px-6 py-4 leading-none">
+                HAI <span class="text-[#E60012] inline-block transform -skew-y-3 bg-white px-3 text-black shadow-sm">SEMUA!</span>
+            </h1>
+        </div>
+
+        <div class="mt-20 max-w-xl mx-auto relative">
+             <div class="bg-white border-4 border-black p-6 md:p-8 transform rotate-1 shadow-[8px_8px_0px_0px_#000] md:shadow-[12px_12px_0px_0px_#000] relative">
+                <div class="absolute -top-6 left-1/2 w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-b-[25px] border-b-black transform -translate-x-1/2"></div>
+                <div class="absolute -top-[20px] left-1/2 w-0 h-0 border-l-[16px] border-l-transparent border-r-[16px] border-r-transparent border-b-[21px] border-b-white transform -translate-x-1/2"></div>
+                
+                <p class="text-lg md:text-xl font-bold font-sans text-black leading-relaxed">
+                    Selamat datang di <span class="text-[#E60012] bg-black px-1 text-white transform -skew-x-6 inline-block">Metaverse</span> pribadiku. 
+                    Sebuah ruang rahasia tempatku berkeluh kesah, berbagi cerita, hingga opini yang mungkin akan <span class="text-[#E60012] bg-black px-1  transform -skew-x-6 inline-block"> mencuri </span> sedikit perhatianmu.
+                    Take your time... but don't stay still for too long. Let the show begin
+                </p>
+             </div>
+        </div>
+    </section>
+
+
+    <div class="relative w-full h-16 md:h-24 bg-[#E60012] -mt-16 md:-mt-24 z-20 shadow-xl transform -skew-y-2" style="clip-path: polygon(0 20%, 100% 0, 100% 80%, 0% 100%);"></div>
+
+
+    <section class="relative z-10 px-4 md:px-6 py-24 max-w-7xl mx-auto">
+        
+        <div class="flex flex-col items-center justify-center mb-16">
+            <img src="/image/p5-icon.png" class="w-16 md:w-20 mb-4 drop-shadow-lg animate-bounce-slow" alt="" />
+            <div class="bg-black text-white px-6 md:px-8 py-3 transform -skew-x-12 border-b-4 border-[#E60012] shadow-lg">
+                <h2 class="text-xl md:text-3xl font-black italic tracking-widest transform skew-x-12">
+                    CONFIDANTS & MEMORIES
+                </h2>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 px-4 md:px-0">
+            {slideshowSlots.map((imagesForThisSlot, slotIndex) => (
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-[#E60012] transform translate-x-2 translate-y-2 md:translate-x-3 md:translate-y-3 skew-y-2 group-hover:translate-x-4 group-hover:translate-y-4 transition shadow-lg"></div>
+                    <div class="relative bg-white border-[3px] md:border-4 border-black p-1.5 md:p-2 transform skew-y-2 hover:skew-y-0 transition duration-300 z-10">
+                        <div class="absolute top-0 left-0 w-6 h-6 md:w-8 md:h-8 border-t-4 border-l-4 border-[#E60012] z-30"></div>
+                        <div class="absolute bottom-0 right-0 w-6 h-6 md:w-8 md:h-8 border-b-4 border-r-4 border-[#E60012] z-30"></div>
+                        <div 
+                            x-data={`{ images: ${JSON.stringify(imagesForThisSlot)}, activeIndex: 0, init() { let delay = 3000 + (Math.random() * 3000); setInterval(() => { this.activeIndex = (this.activeIndex + 1) % this.images.length; }, delay); } }`}
+                            class="relative w-full aspect-[4/5] bg-gray-200 overflow-hidden border border-black"
+                        >
+                            <template x-for="(imgUrl, index) in images" :key="index">
+                                <img :src="imgUrl" x-show="activeIndex === index" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 scale-110" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-1000 absolute inset-0" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute inset-0 w-full h-full object-cover object-center filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500" />
+                            </template>
+                            <div class="absolute bottom-3 left-0 bg-black text-white px-3 py-0.5 font-bold italic text-xs md:text-sm transform -skew-x-12 translate-x-[-5px] z-30 shadow-md border-r-2 border-[#E60012]">
+                                LOG_<span x-text="activeIndex + 1"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <div class="text-center mt-24 md:mt-32 mb-10">
+            <a href="/about" class="inline-block relative group cursor-pointer">
+                <div class="absolute inset-0 bg-black transform skew-x-12 translate-x-0 translate-y-0 transition-transform duration-300 ease-out group-hover:translate-x-2 group-hover:translate-y-2 md:group-hover:translate-x-3 md:group-hover:translate-y-3"></div>
+                <div class="relative bg-black text-white border-4 border-black px-10 py-4 md:px-16 md:py-5 font-black text-xl md:text-2xl italic tracking-widest transform skew-x-12 transition-colors duration-300 group-hover:bg-white group-hover:text-black">
+                    <span class="block transform -skew-x-12 flex items-center justify-center gap-3">
+                        TAKE YOUR HEART <span class="text-2xl md:text-3xl transition-transform duration-300 group-hover:translate-x-2">➜</span>
+                    </span>
+                </div>
+            </a>
+        </div>
+
+    </section>
+
+</MainLayout>

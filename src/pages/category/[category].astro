@@ -1,0 +1,59 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+// === JURUS 1: CARI TAHU ADA KATEGORI APA AJA ===
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+
+  // Ambil semua nama kategori unik dari semua artikel
+  const uniqueCategories = [...new Set(allPosts.map((post) => post.data.category))];
+
+  // Bikin halaman (path) buat masing-masing kategori
+  return uniqueCategories.map((category) => {
+    // Filter artikel yang kategorinya sesuai
+    const filteredPosts = allPosts.filter((post) => post.data.category === category);
+    
+    return {
+      params: { category }, // Ini jadi URL (misal: /category/Jalan-Jalan)
+      props: { posts: filteredPosts }, // Kirim data artikel yang sudah disaring
+    };
+  });
+}
+
+// === JURUS 2: TERIMA DATA ===
+const { category } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<MainLayout title={`Kategori: ${category}`}>
+    <section class="max-w-6xl mx-auto px-6 py-12">
+        
+        <div class="text-center mb-16">
+            <p class="text-gray-500 font-serif italic mb-2">Menampilkan tulisan dalam kategori:</p>
+            <h1 class="text-5xl font-black text-red-900 uppercase tracking-widest border-b-4 border-red-900 inline-block pb-2">
+                {category}
+            </h1>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+            {posts.map((post) => (
+                <article class="group flex flex-col text-center items-center">
+                    <a href={`/blog/${post.slug}/`} class="w-full overflow-hidden mb-6 shadow-sm">
+                        <img 
+                            src={post.data.image || "https://placehold.co/600x400"} 
+                            alt={post.data.title} 
+                            class="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-105"
+                        />
+                    </a>
+                    <a href={`/blog/${post.slug}/`} class="block">
+                        <h2 class="text-xl font-bold text-gray-900 group-hover:text-red-700 transition uppercase">
+                            {post.data.title}
+                        </h2>
+                    </a>
+                </article>
+            ))}
+        </div>
+
+    </section>
+</MainLayout>

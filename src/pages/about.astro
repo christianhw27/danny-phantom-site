@@ -1,0 +1,134 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { getEntry } from 'astro:content';
+
+// 1. Ambil data dari file Markdown src/content/about/index.md
+const entry = await getEntry('about', 'index');
+
+// Jika data tidak ditemukan, beri proteksi agar tidak error
+if (!entry) {
+    return Astro.redirect('/404');
+}
+
+const { codename, realName, arcana, level, location, abilities } = entry.data;
+const { Content } = await entry.render();
+---
+
+<MainLayout title={`Confidant: ${codename}`}>
+
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <img src="/image/p5-splatter.png" class="absolute top-1/4 right-0 w-96 opacity-10 rotate-45" alt="" />
+        <img src="/image/p5-splatter.png" class="absolute bottom-0 left-0 w-64 opacity-10 -rotate-12" alt="" />
+    </div>
+
+    <div class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden z-10">
+        <img 
+            src="/image/self1.jpg" 
+            alt="Phantom Thief Danny" 
+            class="w-full h-full object-cover object-top filter contrast-110 grayscale hover:grayscale-0 transition duration-1000 ease-out"
+            style="clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);" 
+        />
+
+        <div class="absolute bottom-20 left-6 md:left-20">
+            <div class="bg-black text-white px-6 py-2 inline-block transform -skew-x-12 shadow-[8px_8px_0px_0px_#E60012]">
+                <h1 class="text-4xl md:text-7xl font-black italic tracking-tighter transform skew-x-12">
+                    CODE NAME: <span class="text-[#E60012]">{codename}</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <section class="relative z-20 max-w-5xl mx-auto px-6 py-16 -mt-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+            
+            <div class="space-y-8">
+                <div class="bg-white border-4 border-black p-6 shadow-[10px_10px_0px_0px_#000] transform -rotate-1 relative">
+                    <div class="absolute -top-2 -left-2 w-4 h-4 bg-[#E60012] border-2 border-black"></div>
+                    <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-[#E60012] border-2 border-black"></div>
+
+                    <h2 class="text-2xl font-black italic bg-black text-white inline-block px-4 mb-4 transform -skew-x-12">
+                        PLAYER DATA
+                    </h2>
+                    
+                    <ul class="space-y-3 font-bold font-sans text-lg">
+                        <li class="flex justify-between border-b-2 border-gray-200 pb-1">
+                            <span class="text-gray-500 uppercase">Real Name</span>
+                            <span class="text-right">{realName}</span>
+                        </li>
+                        <li class="flex justify-between border-b-2 border-gray-200 pb-1">
+                            <span class="text-gray-500 uppercase">Arcana</span>
+                            <span class="text-[#E60012]">{arcana}</span>
+                        </li>
+                        <li class="flex justify-between border-b-2 border-gray-200 pb-1">
+                            <span class="text-gray-500 uppercase">Level</span>
+                            <span>{level}</span>
+                        </li>
+                        <li class="flex justify-between border-b-2 border-gray-200 pb-1">
+                            <span class="text-gray-500 uppercase">Location</span>
+                            <span>{location}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-black text-white p-6 shadow-[10px_10px_0px_0px_#E60012] transform rotate-1">
+                    <h3 class="text-xl font-black italic mb-6 border-b-2 border-[#E60012] inline-block">
+                        ABILITIES
+                    </h3>
+                    <div class="space-y-4">
+                        {abilities.map((skill) => (
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold italic tracking-wide">{skill.name}</span>
+                                <div class="flex gap-1">
+                                    {Array.from({ length: 5 }).map((_, i) => (
+                                        <img 
+                                            src="/image/p5-star.png" 
+                                            class={`w-6 h-5 object-contain ${i < skill.level ? 'opacity-100' : 'opacity-20 grayscale'}`} 
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="absolute inset-0 bg-[#E60012] transform skew-y-2 translate-x-4 translate-y-4 opacity-10"></div>
+                
+                <div class="relative bg-white p-8 border-l-8 border-black shadow-lg">
+                    <h2 class="text-4xl font-black italic mb-8">
+                        THE <span class="text-[#E60012] bg-black px-2 transform -skew-x-12 inline-block">BACKSTORY</span>
+                    </h2>
+                    
+                    <div class="prose prose-lg font-sans text-gray-800 space-y-6 text-justify leading-relaxed font-medium 
+                                prose-blockquote:border-l-4 prose-blockquote:border-[#E60012] prose-blockquote:bg-gray-100 prose-blockquote:p-4 prose-blockquote:italic">
+                        <Content />
+                    </div>
+
+                    <div class="mt-10 flex flex-col md:flex-row gap-4 justify-end items-center">
+                        
+                        <a href="/blog" class="group relative inline-block">
+                            <div class="absolute inset-0 bg-[#E60012] transform translate-x-1 translate-y-1 skew-x-[-12deg]"></div>
+                            
+                            <div class="relative bg-white border-2 border-black text-black px-6 py-2 font-black italic transform -skew-x-12 hover:bg-black hover:text-white transition duration-300 hover:-translate-y-1 hover:translate-x-1">
+                                <span class="block transform skew-x-12">READ LOGS</span>
+                            </div>
+                        </a>
+
+                        <a href="/contact" class="group relative inline-block">
+                            <div class="absolute inset-0 bg-gray-500 transform translate-x-1 translate-y-1 skew-x-[-12deg]"></div>
+                            
+                            <div class="relative bg-black border-2 border-black text-white px-6 py-2 font-black italic transform -skew-x-12 hover:bg-[#E60012] transition duration-300 hover:-translate-y-1 hover:translate-x-1">
+                                <span class="block transform skew-x-12">SEND CARD ➜</span>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</MainLayout>

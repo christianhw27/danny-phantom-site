@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/* 1. Definisi Font (Biarkan seperti yang tadi berhasil) */
+@font-face {
+  font-family: 'OptimaCustom';
+  src: url('/fonts/optima.otf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 2. JURUS KUNCI: Jadikan Default Global */
+/* Ini artinya: "Hai Browser, tolong semua elemen (html & body) pakai font ini!" */
+html, body {
+  font-family: 'OptimaCustom', sans-serif;
+
+  /* WARNA DASAR: Abu-abu muda banget biar gak sakit mata */
+  background-color: #f3f3f3; 
+  
+  /* POLA BINTIK-BINTIK (Halftone Pattern) */
+  background-image: radial-gradient(#000 1px, transparent 1px);
+  background-size: 20px 20px; /* Jarak antar bintik */
+  background-opacity: 0.1; /* Transparansi (tapi ini ga valid di css murni) */
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(255, 255, 255, 0.9); /* Lapisan putih transparan */
+  z-index: -1;
+}
