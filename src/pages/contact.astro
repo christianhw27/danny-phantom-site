@@ -13,15 +13,9 @@ import MainLayout from '../layouts/MainLayout.astro';
         />
 
         <div 
-            class="relative w-full max-w-6xl bg-[#E60012] md:bg-transparent shadow-[10px_10px_0px_0px_#000] md:shadow-[20px_20px_0px_0px_#000] transform md:-rotate-1 p-4 md:p-16 rounded-xl border-4 border-black"
-            style="background-image: var(--bg-image); background-size: 100% 100%;"
+            class="relative w-full max-w-6xl shadow-[10px_10px_0px_0px_#000] md:shadow-[20px_20px_0px_0px_#000] transform md:-rotate-1 p-4 md:p-16 rounded-xl border-4 border-black bg-cover bg-center"
+            style="background-image: url('/image/p5-calling-card-bg.png');"
         >
-            <style>
-                div { --bg-image: none; }
-                @media (min-width: 768px) {
-                    div { --bg-image: url('/image/p5-calling-card-bg.png'); }
-                }
-            </style>
             
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 relative z-10 items-center">
 
