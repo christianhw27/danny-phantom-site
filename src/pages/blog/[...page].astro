@@ -52,7 +52,7 @@ const categories = [...new Set(allPosts.map((post) => post.data.category))];
         </div>
 
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
     
     {page.data.map((post) => (
         <article class="group relative h-full flex flex-col">
@@ -61,13 +61,15 @@ const categories = [...new Set(allPosts.map((post) => post.data.category))];
             
             <div class="relative flex-grow bg-white border-2 md:border-4 border-black p-3 md:p-4 flex flex-col transform skew-x-3 transition duration-300 hover:-translate-y-1">
                 
-                <div class="relative overflow-hidden border-2 border-black h-32 md:h-48 mb-3 md:mb-4 shrink-0">
-                    <div class="absolute inset-0 bg-[#E60012] opacity-0 group-hover:opacity-30 transition duration-500 z-10 mix-blend-multiply"></div>
+                <div class="relative overflow-hidden border-2 border-black aspect-video md:aspect-auto md:h-48 mb-3 md:mb-4 shrink-0">
+                    <div class="absolute inset-0 bg-[#E60012] opacity-0 md:group-hover:opacity-30 transition duration-500 z-10 mix-blend-multiply"></div>
+                    
                     <img 
                         src={post.data.image || "https://placehold.co/600x400"} 
                         alt={post.data.title} 
-                        class="w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 transition duration-500"
+                        class="w-full h-full object-cover filter contrast-125 md:grayscale md:group-hover:grayscale-0 transition duration-500"
                     />
+                    
                     <div class="absolute top-0 right-0 bg-[#E60012] text-white font-bold text-[10px] md:text-xs px-2 py-1 z-20 shadow-md">
                         {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}
                     </div>
@@ -98,6 +100,8 @@ const categories = [...new Set(allPosts.map((post) => post.data.category))];
             </div>
         </article>
     ))}
+
+</div>
 
 </div>
 
