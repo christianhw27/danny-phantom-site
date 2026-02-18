@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar.astro'; // <--- IMPORT INI PENTING
 const { title } = Astro.props;
 ---
 
-<html lang="id">
+<html lang="en" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -14,11 +14,11 @@ const { title } = Astro.props;
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-[#e6e6e6] font-sans overflow-x-hidden flex flex-col min-h-screen relative">
+<body class="bg-[#e6e6e6] font-sans flex flex-col min-h-screen relative overflow-x-hidden w-full max-w-[100vw]">
 
     <Navbar /> 
     
-    <main class="flex-grow relative">
+    <main class="flex-grow w-full max-w-[100vw] overflow-x-hidden relative">
         <slot />
     </main>
 
