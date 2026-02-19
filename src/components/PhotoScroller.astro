@@ -30,7 +30,7 @@ const uniqueId = `scroller-${Math.random().toString(36).substr(2, 9)}`;
 
         <ul class="scroller-list flex overflow-x-auto gap-4 snap-x snap-mandatory scroll-smooth pb-4 scrollbar-hide">
             {images.map((img, index) => (
-                <li class="relative flex-shrink-0 w-[85%] md:w-[600px] snap-center transform skew-x-3 border-2 border-white bg-white">
+                <li class="relative flex-shrink-0 w-[85%] md:w-[600px] snap-center transform skew-x-3 border-2 border-white bg-black flex flex-col">
                     
                     <div class="absolute top-0 left-0 bg-[#E60012] text-white font-black italic text-xs px-2 py-1 z-20 shadow-sm border-r-2 border-b-2 border-white">
                         EVIDENCE #{index + 1}
@@ -47,7 +47,7 @@ const uniqueId = `scroller-${Math.random().toString(36).substr(2, 9)}`;
                     </div>
 
                     {img.caption && (
-                        <div class="bg-black text-white p-3 border-t-4 border-black relative">
+                        <div class="bg-black text-white p-3 border-t-4 border-black relative flex-grow">
                             <div class="absolute -top-3 left-4 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[12px] border-b-black"></div>
                             <p class="font-bold italic text-sm md:text-base leading-tight tracking-wide">
                                 "{img.caption}"
