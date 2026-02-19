@@ -7,8 +7,12 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
+  site: 'https://danny-phantom-site.vercel.app/',
+vite: {
+    plugins: [
+      // @ts-expect-error
+      tailwindcss()
+    ]
   },
 
   integrations: [mdx()]
