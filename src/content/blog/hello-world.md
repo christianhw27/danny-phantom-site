@@ -3,7 +3,7 @@ title: 'Tes-tes satu dua tiga dicoba...'
 pubDate: 2026-02-18
 description: 'Mencoba menjadi developer sekaligus penulis.'
 author: 'Danny Christian'
-image: '/images/blog/pertama.jpg'
+image: '/images/blog/pertama/pertama.jpg'
 tags: ["koding", "cerita", "awal"]
 category: "Random Talks"
 ---
