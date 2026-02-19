@@ -7,7 +7,7 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://danny-phantom-site.vercel.app/',
+  site: 'https://dannychristian.com',
 vite: {
     plugins: [
       // @ts-expect-error

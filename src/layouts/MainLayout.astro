@@ -13,6 +13,19 @@ const { title } = Astro.props;
     <title>{title}</title>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+        appId: "e660c75a-330f-4d5c-814e-75ec5ca62ae4",
+        safari_web_id: "web.onesignal.auto.1f13959d-363e-4480-ae37-ce4b59dbb72b",
+        notifyButton: {
+            enable: true,
+        },
+        });
+    });
+    </script>
 </head>
 <body class="bg-[#e6e6e6] font-sans flex flex-col min-h-screen relative overflow-x-hidden w-full max-w-[100vw]">
 
