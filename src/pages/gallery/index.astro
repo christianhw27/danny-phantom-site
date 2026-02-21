@@ -1,0 +1,80 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGalleries = await getCollection('gallery');
+const sortedGalleries = allGalleries.sort((a, b) => a.data.order - b.data.order);
+---
+
+<MainLayout title="Evidence Room - Mission Logs">
+    
+<div class="fixed inset-0 z-0 bg-[#1a1a1a] pointer-events-none overflow-hidden">
+        
+        <div class="absolute top-1/4 -left-10 w-[120%] h-40 bg-[#E60012] opacity-[0.04] transform -rotate-6"></div>
+        <div class="absolute bottom-1/4 -right-10 w-[120%] h-20 bg-[#E60012] opacity-[0.06] transform -rotate-12"></div>
+
+        <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, #000 0, #000 2px, transparent 2px, transparent 8px);"></div>
+        
+        <div class="absolute top-20 -right-20 md:-right-32 text-[8rem] md:text-[20rem] font-black italic text-white opacity-[0.03] transform -skew-x-12 -rotate-12 whitespace-nowrap select-none">
+            ARCHIVES
+        </div>
+
+        <img src="/image/p5-mask.png" alt="" class="absolute -right-20 md:right-10 -bottom-20 w-[300px] md:w-[600px] opacity-10 transform -rotate-12" />
+
+        <img src="/image/p5-star.png" alt="" class="absolute bottom-20 left-5 md:left-20 w-48 md:w-80 opacity-[0.15] transform -rotate-12" />
+        
+        <img src="/image/p5-splatter.png" alt="" class="absolute -bottom-10 -left-20 w-80 md:w-96 opacity-20" />
+        <img src="/image/p5-splatter2.png" alt="" class="absolute top-10 right-10 w-48 md:w-80 opacity-15 transform rotate-45" />
+
+        <img src="/image/p5-whitestar.png" alt="" class="absolute top-1/2 right-32 w-24 md:w-40 opacity-20 transform rotate-45" />
+
+        <img src="/image/p5-star.png" alt="" class="absolute top-32 right-1/4 w-12 md:w-16 opacity-30 transform rotate-45" />
+        <img src="/image/p5-star.png" alt="" class="absolute bottom-1/3 left-10 w-10 md:w-14 opacity-25 transform -rotate-12" />
+        <img src="/image/p5-star.png" alt="" class="absolute top-20 right-20 w-20 md:w-24 opacity-20 transform rotate-12" />
+        <img src="/image/p5-whitestar.png" alt="" class="absolute bottom-20 right-1/3 w-8 md:w-12 opacity-20 transform rotate-90" />
+        
+    </div>
+
+    <section class="relative z-10 max-w-7xl mx-auto px-6 py-16 min-h-screen">
+        
+        <div class="mb-8 md:mb-16 border-b-2 md:border-b-4 border-[#E60012] pb-2 md:pb-4 inline-block relative max-w-full">
+            <img src="/image/p5-splatter2.png" alt="" class="absolute -top-4 -right-4 md:-top-10 md:-right-12 w-24 md:w-48 opacity-50 z-0 pointer-events-none" />
+            
+            <h1 class="text-4xl md:text-7xl font-black italic text-white tracking-tighter transform -skew-x-12 shadow-black drop-shadow-[3px_3px_0px_rgba(0,0,0,1)] md:drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] relative z-10 flex items-center gap-2 md:gap-4">
+                <img src="/image/p5-logo-small.png" alt="Logo" class="w-8 md:w-16 transform rotate-12" />
+                <span class="truncate">EVIDENCE <span class="text-[#E60012]">ROOM</span></span>
+            </h1>
+            <p class="font-bold italic text-gray-400 mt-1 md:mt-2 text-[10px] md:text-base transform -skew-x-12 uppercase tracking-widest relative z-10">
+                // Select a file to investigate
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-12 pt-6 md:pt-10">
+            {sortedGalleries.map((folder, index) => (
+                <a href={`/gallery/${folder.slug}/`} class={`group relative block transition-transform duration-300 hover:scale-105 hover:z-20 ${index % 2 === 0 ? 'transform rotate-2' : 'transform -rotate-3 mt-8 md:mt-12'} ${index % 3 === 2 ? 'lg:mt-6' : ''}`}>
+                    
+                    <div class="w-1/2 h-5 md:h-8 bg-[#D2B48C] border-2 border-black rounded-t-lg ml-2 md:ml-4 relative z-0 border-b-0 shadow-[2px_0px_0px_0px_rgba(0,0,0,0.3)] md:shadow-[4px_0px_0px_0px_rgba(0,0,0,0.3)] group-hover:bg-[#E2C49C] transition-colors"></div>
+                    
+                    <div class="relative bg-[#D2B48C] border-2 border-black rounded-b-lg rounded-tr-lg p-2 md:p-4 h-40 md:h-64 flex flex-col justify-between shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,0.8)] z-10 group-hover:bg-[#E2C49C] transition-colors overflow-hidden">
+                        
+                        <div class="absolute top-1 md:top-2 left-1/2 -translate-x-1/2 w-6 md:w-12 h-2 md:h-3 border-[1px] md:border-[3px] border-gray-600 rounded-full z-30 shadow-sm opacity-80"></div>
+
+                        <div class="relative w-full h-16 md:h-32 bg-white border-2 md:border-4 border-white shadow-md transform rotate-2 mt-3 md:mt-4 overflow-hidden group-hover:-rotate-1 transition-transform">
+                            <img src={folder.data.coverImage} alt={folder.data.title} class="w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500" />
+                        </div>
+
+                        <div class="mt-2 md:mt-4 bg-black text-white p-1 md:p-2 border-2 border-dashed border-gray-500 transform -skew-x-3">
+                            <h2 class="font-black italic text-[9px] md:text-lg uppercase truncate">{folder.data.title}</h2>
+                        </div>
+
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-12 opacity-80 z-20 pointer-events-none w-full text-center">
+                            <span class="text-sm md:text-4xl font-black text-[#E60012] border-2 md:border-4 border-[#E60012] px-1 md:px-4 py-0 md:py-1 inline-block uppercase tracking-widest mix-blend-multiply" style="font-family: 'Impact', sans-serif;">
+                                {folder.data.stamp}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            ))}
+        </div>
+    </section>
+</MainLayout>

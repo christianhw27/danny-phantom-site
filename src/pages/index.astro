@@ -39,7 +39,7 @@ const slideshowSlots = [1, 2, 3].map(() => shuffle(rawImages));
     </div>
 
 
-    <section class="relative z-10 pt-28 pb-32 px-4 md:px-6 text-center overflow-visible">
+<section class="relative z-10 pt-8 md:pt-28 pb-32 px-4 md:px-6 text-center overflow-visible">
         
         <img 
             src="/image/p5-star.png" 
@@ -85,22 +85,66 @@ const slideshowSlots = [1, 2, 3].map(() => shuffle(rawImages));
                 <div class="absolute -top-[18px] left-1/2 w-0 h-0 border-l-[11px] border-l-transparent border-r-[11px] border-r-transparent border-b-[21px] border-b-white transform -translate-x-1/2"></div>
                 
                 <p class="text-lg md:text-xl font-optima font-bold text-black leading-relaxed">
-                    Selamat datang di <span class="text-[#E60012] bg-black px-1 text-white transform -skew-x-6 inline-block">Metaverse</span> pribadiku. 
+                    Selamat datang di <span class="text-[#E60012] bg-black px-1 text-white transform -skew-x-6 inline-block">Metaverse</span> pribadiku.
                     Sebuah ruang rahasia tempatku berkeluh kesah, berbagi cerita, hingga opini yang mungkin akan <span class="text-[#E60012] bg-black px-1  transform -skew-x-6 inline-block"> mencuri </span> sedikit perhatianmu.
-                    <span class="text-[#E60012]" > Take your time . . . but don't stay still for too long.<br>Let the show begin! </span>
+                    <br> <span class="text-[#E60012]" > Take your time, but don't stay still for too long. Let the show begin!
+                    </span>
                 </p>
              </div>
         </div>
-    </section>
 
+<div class="mt-8 md:mt-20 grid grid-cols-2 gap-2 md:gap-0 md:flex md:flex-row md:flex-wrap md:justify-center md:items-center md:gap-6 lg:gap-8 relative z-30 px-2 max-w-7xl mx-auto">
+
+            <img src="/image/p5-star.png" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 opacity-10 rotate-45 z-0 pointer-events-none hidden lg:block" alt="" />
+
+            <a href="/about" class="group relative inline-block cursor-pointer col-span-1 w-full md:w-auto">
+                <div class="absolute inset-0 bg-black transform skew-x-12 translate-x-1 translate-y-1 md:translate-x-2 md:translate-y-2 border-[1.5px] md:border-4 border-black group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
+                
+                <div class="relative bg-[#E60012] text-white px-1 py-2 md:px-6 md:py-4 border-[1.5px] md:border-4 border-black transform -skew-x-12 group-hover:bg-black group-hover:text-[#E60012] transition-colors duration-300 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.5)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                    
+                    <img src="/image/p5-logo-small.png" class="absolute -top-5 -left-3 md:-top-6 md:-left-4 w-9 md:w-12 z-40 drop-shadow-md transition-all duration-500 ease-out transform -rotate-12 opacity-100 md:opacity-0 md:-translate-y-12 md:-translate-x-4 md:rotate-0 md:group-hover:opacity-100 md:group-hover:translate-y-0 md:group-hover:translate-x-0 md:group-hover:-rotate-12" alt="Topi Joker" />
+                    
+                    <span class="block transform skew-x-12 font-black italic text-4xs sm:text-sm md:text-xl lg:text-2xl tracking-tighter whitespace-nowrap">
+                        TAKE YOUR <span class="text-black group-hover:text-white transition-colors">HEART</span>
+                    </span>
+                </div>
+            </a>
+
+            <a href="/blog" class="group relative inline-block cursor-pointer col-span-1 w-full md:w-auto">
+                <div class="absolute inset-0 bg-[#E60012] transform -skew-x-12 translate-x-1 translate-y-1 md:translate-x-2 md:translate-y-2 border-[1.5px] md:border-4 border-black group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
+                
+                <div class="relative bg-white text-black px-1 py-2 md:px-6 md:py-4 border-[1.5px] md:border-4 border-black transform skew-x-12 group-hover:bg-[#E60012] group-hover:text-white transition-colors duration-300 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.5)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                    
+                    <img src="/image/p5-whitestar.png" class="absolute -bottom-4 -right-3 md:-bottom-5 md:-right-3 w-10 md:w-10 z-40 drop-shadow-lg transition-all duration-500 ease-out transform rotate-12 opacity-100 md:opacity-0 md:translate-y-12 md:-rotate-45 md:group-hover:opacity-100 md:group-hover:translate-y-0 md:group-hover:rotate-12" alt="Bintang P5" />
+                    
+                    <span class="block transform -skew-x-12 font-black italic text-4xs sm:text-sm md:text-xl lg:text-2xl tracking-tighter whitespace-nowrap z-10 relative">
+                        READ <span class="text-[#E60012] group-hover:text-black transition-colors">LOGS</span>
+                    </span>
+                </div>
+            </a>
+
+            <a href="/gallery" class="group relative inline-block cursor-pointer col-span-2 place-self-center w-[85%] md:w-auto mt-2 md:mt-0">
+                <div class="absolute inset-0 bg-white transform skew-x-12 translate-x-1 translate-y-1 md:translate-x-2 md:translate-y-2 border-[1.5px] md:border-4 border-black group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
+                
+                <div class="relative bg-black text-white px-2 py-2 md:px-6 md:py-4 border-[1.5px] md:border-4 border-black transform -skew-x-12 group-hover:bg-white group-hover:text-black transition-colors duration-300 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.5)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                    
+                    <img src="/image/dagger.png" class="absolute top-1/2 -right-4 md:-right-6 w-9 md:w-12 z-40 drop-shadow-lg transition-all duration-500 ease-out transform -translate-y-1/2 opacity-100 md:opacity-0 md:-translate-y-[200%] md:translate-x-[150%] md:group-hover:opacity-100 md:group-hover:-translate-y-1/2 md:group-hover:translate-x-0" alt="Pisau Dagger" />
+                    
+                    <span class="block transform skew-x-12 font-black italic text-sm sm:text-base md:text-4xs lg:text-2xl tracking-tighter whitespace-nowrap z-10 relative">
+                        INFILTRATE <span class="text-[#E60012]">ARCHIVES</span>
+                    </span>
+                </div>
+            </a>
+
+        </div>
+        </section>
 
     <div class="relative w-full h-16 md:h-24 bg-[#E60012] -mt-16 md:-mt-24 z-20 shadow-xl transform -skew-y-2" style="clip-path: polygon(0 20%, 100% 0, 100% 80%, 0% 100%);"></div>
-
 
     <section class="relative z-10 px-4 md:px-6 py-24 max-w-7xl mx-auto">
         
         <div class="flex flex-col items-center justify-center mb-16">
-            <img src="/image/p5-icon.png" class="w-16 md:w-20 mb-4 drop-shadow-lg animate-bounce-slow" alt="" />
+            <img src="/image/p5-icon.png" class="w-30 md:w-20 mb-4 drop-shadow-lg animate-bounce-slow" alt="" />
             <div class="bg-black text-white px-6 md:px-8 py-3 transform -skew-x-12 border-b-4 border-[#E60012] shadow-lg">
                 <h2 class="text-xl md:text-3xl font-black italic tracking-widest transform skew-x-12">
                     CONFIDANTS & MEMORIES
@@ -129,17 +173,6 @@ const slideshowSlots = [1, 2, 3].map(() => shuffle(rawImages));
                     </div>
                 </div>
             ))}
-        </div>
-
-        <div class="text-center mt-24 md:mt-32 mb-10">
-            <a href="/about" class="inline-block relative group cursor-pointer">
-                <div class="absolute inset-0 bg-black transform skew-x-12 translate-x-0 translate-y-0 transition-transform duration-300 ease-out group-hover:translate-x-2 group-hover:translate-y-2 md:group-hover:translate-x-3 md:group-hover:translate-y-3"></div>
-                <div class="relative bg-black text-white border-4 border-black px-10 py-4 md:px-16 md:py-5 font-black text-xl md:text-2xl italic tracking-widest transform skew-x-12 transition-colors duration-300 group-hover:bg-white group-hover:text-black">
-                    <span class="block transform -skew-x-12 flex items-center justify-center gap-3">
-                        TAKE YOUR HEART <span class="text-2xl md:text-3xl transition-transform duration-300 group-hover:translate-x-2">➜</span>
-                    </span>
-                </div>
-            </a>
         </div>
 
     </section>

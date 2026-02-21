@@ -1,0 +1,190 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption: string;
+  description?: string;
+  rotate?: string;
+  customClass?: string;
+}
+
+const { src, alt, caption, description, rotate = "rotate-0", customClass = "" } = Astro.props;
+const backText = description || caption;
+---
+
+<div class={`polaroid-item relative inline-block perspective-1000 ${customClass} group hover:z-[100]`}>
+    <div class={`polaroid-zoom-wrapper transform transition-all duration-500 ${rotate} cursor-pointer group-hover:scale-110`}>
+        
+        <div class="polaroid-flipper relative w-full h-full transition-transform duration-500 transform-style-3d">
+            
+           <div class="polaroid-front backface-hidden bg-[#f4f1e8] p-2 md:p-3 shadow-[3px_3px_10px_rgba(0,0,0,0.6)] border-2 border-gray-400 relative z-[2] inline-flex flex-col items-center">
+                 <div class="absolute inset-0 opacity-20 pointer-events-none mix-blend-multiply" style="background-image: url('https://www.transparenttextures.com/patterns/crumpled-paper.png');"></div>
+
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-5 md:w-6 h-5 md:h-6 bg-gradient-to-br from-[#E60012] to-[#800000] rounded-full shadow-[2px_2px_4px_rgba(0,0,0,0.7)] border-[1px] border-black z-20">
+                    <div class="absolute inset-0 rounded-full border-2 border-black opacity-30 transform scale-125"></div>
+                    <div class="absolute top-1 left-1 w-1.5 h-1.5 bg-white rounded-full opacity-70 blur-[0.5px]"></div>
+                </div>
+                
+                <div class="relative overflow-hidden border-2 border-black mt-3 bg-black">
+                    <div class="absolute inset-0 z-10 pointer-events-none opacity-30 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:4px_4px]"></div>
+
+                    <img 
+                        src={src} 
+                        alt={alt} 
+                        class="w-auto h-auto max-w-full md:max-w-[320px] max-h-[160px] sm:max-h-[200px] md:max-h-[350px] filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500 relative z-0"
+                        loading="lazy"
+                    />
+                    
+                    <div class="flip-indicator absolute bottom-1 right-1 md:bottom-2 md:right-2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-30 pointer-events-none">
+                        <span class="block font-black italic text-[10px] md:text-xs text-[#E60012] uppercase tracking-wider transform -rotate-6 drop-shadow-[2px_2px_0_rgba(0,0,0,1)]" style="-webkit-text-stroke: 0.5px white;">
+                            TAP TO FLIP ↺
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="w-full mt-3 relative">
+                    <div class="absolute inset-0 bg-black transform -skew-x-3 scale-105 border border-[#E60012]"></div>
+                    <div class="relative z-10 w-full min-h-[2rem] flex justify-center items-center px-2 py-1.5 bg-[#f4f1e8] transform skew-x-3 border-b-2 border-r-2 border-black">
+                         <p class="text-black font-bold uppercase text-[11px] sm:text-xs md:text-sm text-center line-clamp-2 break-words leading-snug w-full">
+                            {caption}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="polaroid-back absolute inset-0 backface-hidden bg-[#d4c8b4] p-3 md:p-4 shadow-[3px_3px_10px_rgba(0,0,0,0.5)] border-2 border-gray-500 flex flex-col items-center justify-center z-[1] overflow-hidden">
+                <div class="absolute inset-0 opacity-10 pointer-events-none mix-blend-multiply" style="background-image: url('https://www.transparenttextures.com/patterns/cardboard-flat.png');"></div>
+                
+                <div class="absolute inset-2 border-2 border-[#E60012] opacity-40 border-dashed pointer-events-none"></div>
+
+                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform -rotate-12 pointer-events-none opacity-15 z-0">
+                    <span class="text-6xl md:text-8xl font-black text-[#E60012] tracking-[0.2em] border-4 border-[#E60012] p-2 rounded-sm dashed-stamp">
+                        EVIDENCE
+                    </span>
+                 </div>
+                
+                <div class="relative z-10 w-full h-full overflow-y-auto flex items-center justify-center my-2 scrollbar-thin scrollbar-thumb-[#E60012] scrollbar-track-transparent">
+                    <p class="text-black font-bold text-[11px] md:text-sm text-left leading-relaxed break-words whitespace-normal px-2 w-full" style="font-family: 'Courier New', monospace; text-shadow: 0.5px 0.5px 0 rgba(0,0,0,0.2);">
+                        <span class="bg-black text-white px-1 text-xs">>_ LOG ENTRY:</span><br/>
+                        {backText}
+                    </p>
+                </div>
+                
+                <img src="/image/p5-star.png" alt="" class="absolute bottom-1 right-1 w-6 md:w-10 opacity-40 mix-blend-multiply pointer-events-none rotate-12" />
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .perspective-1000 { 
+        perspective: 1000px; 
+        -webkit-perspective: 1000px;
+    }
+    .transform-style-3d { 
+        transform-style: preserve-3d; 
+        -webkit-transform-style: preserve-3d;
+    }
+    .backface-hidden { 
+        backface-visibility: hidden; 
+        -webkit-backface-visibility: hidden; 
+    }
+    .polaroid-back {
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+    }
+    .is-flipped {
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+    }
+
+    /* Efek Zoom: Skalanya sedikit dikurangi biar gak terlalu 'jump scare' di HP */
+    .is-zoomed {
+        transform: scale(1.15) !important; 
+        z-index: 100 !important;
+    }
+    /* Saat di-zoom atau di-flip, foto jadi berwarna dan kontrasnya normal */
+    .is-zoomed img, .is-flipped img {
+        filter: grayscale(0) contrast(100%) !important;
+    }
+
+    /* Logika Indikator Flip */
+    .is-zoomed .flip-indicator {
+        opacity: 1 !important;
+        transition-delay: 0.1s;
+    }
+    .polaroid-flipper.is-flipped .polaroid-front .flip-indicator {
+        opacity: 0 !important;
+    }
+    
+    /* CSS untuk efek stempel putus-putus */
+    .dashed-stamp {
+        mask-image: repeating-linear-gradient(135deg, black, black 5px, transparent 5px, transparent 8px);
+    }
+    
+    /* Scrollbar Kustom untuk Backtext yang panjang */
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 4px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-track {
+        background: transparent; 
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        background-color: #E60012; 
+        border-radius: 10px;
+    }
+</style>
+
+<script>
+    const polaroidItems = document.querySelectorAll('.polaroid-item');
+    let activeItem = null;
+
+    polaroidItems.forEach(item => {
+        const wrapper = item.querySelector('.polaroid-zoom-wrapper');
+        const flipper = item.querySelector('.polaroid-flipper');
+        
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+            if (isTouch) {
+                if (activeItem !== item) {
+                    if (activeItem) {
+                        activeItem.querySelector('.polaroid-zoom-wrapper').classList.remove('is-zoomed');
+                        activeItem.querySelector('.polaroid-flipper').classList.remove('is-flipped');
+                        activeItem.style.zIndex = ''; 
+                    }
+                    wrapper.classList.add('is-zoomed');
+                    item.style.zIndex = '100';
+                    activeItem = item;
+                } else {
+                    flipper.classList.toggle('is-flipped');
+                }
+            } else {
+                polaroidItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.querySelector('.polaroid-flipper').classList.remove('is-flipped');
+                        otherItem.style.zIndex = '';
+                    }
+                });
+                flipper.classList.toggle('is-flipped');
+                
+                if (flipper.classList.contains('is-flipped')) {
+                    item.style.zIndex = '100';
+                } else {
+                    setTimeout(() => { item.style.zIndex = ''; }, 300);
+                }
+            }
+        });
+    });
+
+    document.addEventListener('click', () => {
+        polaroidItems.forEach(item => {
+            item.querySelector('.polaroid-zoom-wrapper')?.classList.remove('is-zoomed');
+            item.querySelector('.polaroid-flipper')?.classList.remove('is-flipped');
+            item.style.zIndex = '';
+        });
+        activeItem = null;
+    });
+</script>

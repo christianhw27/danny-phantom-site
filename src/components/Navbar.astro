@@ -6,17 +6,18 @@
 <header class="fixed w-full top-0 z-50 px-4 md:px-8 h-20 bg-black border-b-4 border-[#E60012] flex items-center shadow-2xl transition-all duration-300">
     <nav class="flex justify-between items-center w-full max-w-7xl mx-auto">
 
-        <a href="/" class="flex items-center gap-3 group transform hover:scale-105 transition duration-300 select-none">
-            <div class="relative bg-[#E60012] px-4 py-1 transform -skew-x-12 border-2 border-white shadow-[3px_3px_0px_0px_#444] group-hover:shadow-[3px_3px_0px_0px_#fff] transition">
-                 <span class="block font-black italic text-xl md:text-2xl tracking-tighter text-white transform skew-x-12 font-optima">DANNY</span>
+        <a href="/" class="flex items-center gap-1.5 md:gap-3 group transform hover:scale-105 transition duration-300 select-none shrink-0">
+            <div class="relative bg-[#E60012] px-2 md:px-4 py-0.5 md:py-1 transform -skew-x-12 border-2 border-white shadow-[2px_2px_0px_0px_#444] md:shadow-[3px_3px_0px_0px_#444] group-hover:shadow-[2px_2px_0px_0px_#fff] md:group-hover:shadow-[3px_3px_0px_0px_#fff] transition">
+                 <span class="block font-black italic text-base sm:text-lg md:text-2xl tracking-tighter text-white transform skew-x-12 font-optima">DANNY</span>
             </div>
-            <span class="text-white font-black italic text-xl md:text-2xl tracking-[0.2em] font-optima group-hover:text-[#E60012] transition">CHRISTIAN</span>
+            <span class="text-white font-black italic text-base sm:text-lg md:text-2xl tracking-widest md:tracking-[0.2em] font-optima group-hover:text-[#E60012] transition">CHRISTIAN</span>
         </a>
 
         <ul class="hidden md:flex space-x-10 text-lg font-bold italic tracking-widest font-optima items-center">
             <li><a href="/" class="text-white hover:text-[#E60012] transition relative group py-2">HOME<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E60012] transition-all group-hover:w-full"></span></a></li>
             <li><a href="/about" class="text-white hover:text-[#E60012] transition relative group py-2">ABOUT<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E60012] transition-all group-hover:w-full"></span></a></li>
             <li><a href="/blog" class="text-white hover:text-[#E60012] transition relative group py-2">MISSION LOGS<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E60012] transition-all group-hover:w-full"></span></a></li>
+            <li><a href="/gallery" class="text-white hover:text-[#E60012] transition relative group py-2">ARCHIVES<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E60012] transition-all group-hover:w-full"></span></a></li>
             <li>
                 <a href="/contact" class="ml-2 text-black bg-white px-6 py-1 transform -skew-x-12 hover:bg-[#E60012] hover:text-white transition border-2 border-white relative group inline-block shadow-[4px_4px_0px_0px_#333]">
                     <span class="block transform skew-x-12 font-black">CALLING CARD</span>
@@ -24,8 +25,8 @@
             </li>
         </ul>
 
-        <button id="menu-toggle" class="md:hidden z-50 focus:outline-none transform hover:scale-110 transition duration-300 active:scale-95">
-            <img src="/image/p5-menu-custom.png" alt="Menu" class="w-auto h-12 drop-shadow-[0_0_2px_#fff] transform -rotate-3">
+        <button id="menu-toggle" class="md:hidden z-50 focus:outline-none transform hover:scale-110 transition duration-300 active:scale-95 shrink-0 ml-auto pl-25">
+            <img src="/image/p5-menu-custom.png" alt="Menu" class="w-auto h-20 sm:h-10 md:h-12 drop-shadow-[0_0_2px_#fff] transform">
         </button>
 
     </nav>
@@ -55,6 +56,12 @@
         <li class="w-full">
             <a href="/blog" class="mobile-link block w-full text-white hover:text-black hover:bg-white transition-all duration-300 py-2 transform hover:scale-105 hover:skew-x-[-10deg]">
                 MISSION LOGS
+            </a>
+        </li>
+
+        <li class="w-full">
+            <a href="/gallery" class="mobile-link block w-full text-white hover:text-black hover:bg-white transition-all duration-300 py-2 transform hover:scale-105 hover:skew-x-[-10deg]">
+                ARCHIVES
             </a>
         </li>
 
