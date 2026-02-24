@@ -49,21 +49,21 @@ import MainLayout from '../layouts/MainLayout.astro';
                         <span class="text-[#E60012]">►</span> SEND REQUEST
                     </h2>
 
-                    <form action="mailto:dannyychr27@gmail.com" method="POST" enctype="text/plain" class="space-y-4 md:space-y-5 font-sans">
+                    <form id="callingCardForm" class="space-y-4 md:space-y-5 font-sans">
                         
                         <div class="relative group">
                             <label class="block font-black italic bg-black text-white px-2 py-1 w-fit mb-1 transform -skew-x-12 text-xs md:text-sm">CODENAME</label>
-                            <input type="text" name="codename" class="w-full bg-gray-100 border-2 md:border-4 border-black p-2 md:p-3 font-bold focus:bg-black focus:text-white outline-none" placeholder="JOKER" required />
+                            <input type="text" id="codename" name="codename" class="w-full bg-gray-100 border-2 md:border-4 border-black p-2 md:p-3 font-bold focus:bg-black focus:text-white outline-none" placeholder="JOKER" required />
                         </div>
 
                         <div class="relative group">
-                            <label class="block font-black italic bg-black text-white px-2 py-1 w-fit mb-1 transform -skew-x-12 text-xs md:text-sm">CHANNEL</label>
-                            <input type="email" name="email" class="w-full bg-gray-100 border-2 md:border-4 border-black p-2 md:p-3 font-bold focus:bg-black focus:text-white outline-none" placeholder="email@phantom.com" required />
+                            <label class="block font-black italic bg-black text-white px-2 py-1 w-fit mb-1 transform -skew-x-12 text-xs md:text-sm">SUBJECT</label>
+                            <input type="text" id="subject" name="subject" class="w-full bg-gray-100 border-2 md:border-4 border-black p-2 md:p-3 font-bold focus:bg-black focus:text-white outline-none" placeholder="Target Name / Mission Title" required />
                         </div>
 
                         <div class="relative group">
                             <label class="block font-black italic bg-black text-white px-2 py-1 w-fit mb-1 transform -skew-x-12 text-xs md:text-sm">MISSION</label>
-                            <textarea name="message" rows="3" class="w-full bg-gray-100 border-2 md:border-4 border-black p-2 md:p-3 font-bold focus:bg-black focus:text-white outline-none resize-none" placeholder="We have a target..." required></textarea>
+                            <textarea id="message" name="message" rows="3" class="w-full bg-gray-100 border-2 md:border-4 border-black p-2 md:p-3 font-bold focus:bg-black focus:text-white outline-none resize-none" placeholder="We have a target..." required></textarea>
                         </div>
 
                         <button type="submit" class="w-full group relative mt-6 cursor-pointer">
@@ -81,3 +81,39 @@ import MainLayout from '../layouts/MainLayout.astro';
 
     </div>
 </MainLayout>
+<script>
+    document.getElementById('callingCardForm').addEventListener('submit', function(e) {
+        // Cegah halaman web me-reload secara otomatis
+        e.preventDefault(); 
+
+        // 1. Ambil data yang diketik user
+        const codename = document.getElementById('codename').value;
+        const inputSubject = document.getElementById('subject').value; // Ambil isian Subject
+        const message = document.getElementById('message').value;
+
+        // 2. Email Tujuanmu
+        const targetEmail = "dannyychr27@gmail.com";
+        
+        // 3. Format Judul Email (Gabungan antara input subjek dan nama Codename)
+        const finalSubject = encodeURIComponent(`[CALLING CARD] ${inputSubject} - from ${codename}`);
+        
+        // 4. Format Isi Pesan (Kolom Channel dihapus karena email pengirim otomatis terdeteksi di Gmail)
+        // 4. Format Isi Pesan (Hacker Style dengan Unicode & ASCII Divider)
+        const body = encodeURIComponent(
+            `🚨 𝗧𝗔𝗥𝗚𝗘𝗧 𝗔𝗖𝗤𝗨𝗜𝗥𝗘𝗗 🚨\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+            `👤 𝗦𝗲𝗻𝗱𝗲𝗿 𝗖𝗼𝗱𝗲𝗻𝗮𝗺𝗲: ${codename}\n` +
+            `🎯 𝗧𝗮𝗿𝗴𝗲𝘁 𝗦𝘂𝗯𝗷𝗲𝗰𝘁: ${inputSubject}\n\n` +
+            `📜 𝗠𝗶𝘀𝘀𝗶𝗼𝗻 𝗗𝗲𝘁𝗮𝗶𝗹𝘀:\n` +
+            `"${message}"\n\n` +
+            `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+            `👁️‍🗨️ 𝘚𝘦𝘯𝘵 𝘧𝘳𝘰𝘮 𝘵𝘩𝘦 𝘔𝘦𝘵𝘢𝘷𝘦𝘳𝘴𝘦.`
+        );
+        
+        // 5. URL Rahasia Pemanggil Web Gmail
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${targetEmail}&su=${finalSubject}&body=${body}`;
+
+        // 6. Buka Web Gmail di Tab Baru
+        window.open(gmailUrl, '_blank');
+    });
+</script>
